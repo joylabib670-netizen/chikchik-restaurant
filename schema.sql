@@ -60,6 +60,10 @@ drop policy if exists "public read content" on public.social_profiles;
 drop policy if exists "public read posts" on public.social_posts;
 drop policy if exists "public read reviews" on public.reviews;
 drop policy if exists "public read settings" on public.site_settings;
+drop policy if exists "admins manage reviews" on public.reviews;
+drop policy if exists "admins manage social profiles" on public.social_profiles;
+drop policy if exists "admins manage social posts" on public.social_posts;
+drop policy if exists "admins manage settings" on public.site_settings;
 
 create policy "public can view available menu" on public.menu_items for select using (available=true);
 create policy "public can create orders" on public.orders for insert with check (district='Dhaka' and division='Dhaka');
@@ -72,6 +76,10 @@ create policy "public read content" on public.social_profiles for select using (
 create policy "public read posts" on public.social_posts for select using (active=true);
 create policy "public read reviews" on public.reviews for select using (true);
 create policy "public read settings" on public.site_settings for select using (true);
+create policy "admins manage reviews" on public.reviews for all using (exists(select 1 from public.admin_profiles p where p.id=auth.uid())) with check (exists(select 1 from public.admin_profiles p where p.id=auth.uid()));
+create policy "admins manage social profiles" on public.social_profiles for all using (exists(select 1 from public.admin_profiles p where p.id=auth.uid())) with check (exists(select 1 from public.admin_profiles p where p.id=auth.uid()));
+create policy "admins manage social posts" on public.social_posts for all using (exists(select 1 from public.admin_profiles p where p.id=auth.uid())) with check (exists(select 1 from public.admin_profiles p where p.id=auth.uid()));
+create policy "admins manage settings" on public.site_settings for all using (exists(select 1 from public.admin_profiles p where p.id=auth.uid())) with check (exists(select 1 from public.admin_profiles p where p.id=auth.uid()));
 
 create or replace function public.get_order_by_code(p_code text)
 returns table(order_code text,name text,items jsonb,subtotal integer,delivery_charge integer,total integer,status text,created_at timestamptz,updated_at timestamptz)
