@@ -33,7 +33,7 @@ update public.menu_items set image_url='dip.jpg',gallery_urls=array['dip.jpg'],i
 update public.menu_items set image_url=null,gallery_urls='{}',video_url=null,image_verified=false,image_alt_text=null where catalog_status='active' and lower(name) not in ('chicken finger','chik sauce (50 ml)','four finger feast');
 update public.social_posts set menu_item_id=null;
 update public.social_posts set menu_item_id=(select id from public.menu_items where slug='four-finger-feast') where lower(caption) like '%four finger%';
-update public.social_posts set menu_item_id=(select id from public.menu_items where lower(name)='chik sauce (50 ml)' and catalog_status='active') where lower(caption) like '%chik sauce%';
+update public.social_posts set menu_item_id=(select id from public.menu_items where lower(name)='chik sauce (50 ml)' and catalog_status='active') where lower(caption)='chik sauce makes the crunch.';
 update public.social_posts set menu_item_id=(select id from public.menu_items where lower(name)='chicken finger' and catalog_status='active') where lower(caption) like '%crispy to dip%';
 comment on column public.menu_items.image_verified is 'True only when visual is tied to this specific product; false means neutral placeholder.';
 comment on column public.menu_items.source_confidence is 'official, cross_checked, or unverified public-source confidence.';
