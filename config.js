@@ -1,6 +1,13 @@
 window.SUPABASE_URL='https://zibymvoatyyrzadwwxnf.supabase.co';
 window.SUPABASE_ANON_KEY='sb_publishable_WRQf7hoQgaUhv_IQxYFayw_YdJCIAdZ';
 window.SITE_ASSET_PREFIX='';
+window.CHIKCHIK_PRODUCTION_ORIGIN='https://chikchik-restaurant.netlify.app';
+window.chikchikAuthUrl=(path='account.html')=>{
+  const origin=window.location.origin;
+  const local=/^(https?:\/\/localhost|https?:\/\/127\.0\.0\.1|file:)/i.test(origin);
+  const base=local?origin:window.CHIKCHIK_PRODUCTION_ORIGIN;
+  return new URL(path, `${base.endsWith('/')?base.slice(0,-1):base}/`).href;
+};
 (() => {
   const memory = new Map();
   const timeoutFetch = (input, init = {}) => {
