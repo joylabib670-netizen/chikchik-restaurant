@@ -69,6 +69,13 @@
           <div id="signup-message" class="form-message" role="status" aria-live="polite"></div>
           <p class="auth-switch">Already have an account? <button type="button" class="text-btn" data-auth-tab="login">Sign in</button></p>
         </form>
+        <form id="recovery-form" class="account-form auth-form" role="tabpanel" aria-labelledby="recovery-title" hidden>
+          <p class="step-eyebrow">Account recovery</p><h2 id="recovery-title">Choose a new <span>password.</span></h2><p class="muted">Use a strong password you have not used elsewhere.</p>
+          <div class="field-group"><label for="recovery-password">New password</label><div class="password-field"><input id="recovery-password" name="password" type="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"><button type="button" class="field-action" data-toggle-password="recovery-password" aria-label="Show password">Show</button></div></div>
+          <div class="field-group"><label for="recovery-confirm">Confirm new password</label><input id="recovery-confirm" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required placeholder="Type it again"></div>
+          <button class="btn red auth-submit" type="submit"><span>Update password</span><b aria-hidden="true">↗</b></button><div id="recovery-message" class="form-message" role="status" aria-live="polite"></div>
+          <p class="auth-switch">Remembered it? <button type="button" class="text-btn" data-auth-tab="login">Back to sign in</button></p>
+        </form>
         <p class="auth-legal">By continuing, you agree to use ChikChik responsibly. We only use your account details to provide ordering, delivery and account features.</p>
       </section>
     </section>
