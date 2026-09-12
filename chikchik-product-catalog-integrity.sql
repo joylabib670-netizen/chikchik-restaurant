@@ -37,3 +37,4 @@ update public.social_posts set menu_item_id=(select id from public.menu_items wh
 update public.social_posts set menu_item_id=(select id from public.menu_items where lower(name)='chicken finger' and catalog_status='active') where lower(caption) like '%crispy to dip%';
 comment on column public.menu_items.image_verified is 'True only when visual is tied to this specific product; false means neutral placeholder.';
 comment on column public.menu_items.source_confidence is 'official, cross_checked, or unverified public-source confidence.';
+update public.menu_items set slug=trim(both '-' from regexp_replace(lower(name),'[^a-z0-9]+','-','g')) where catalog_status='active' and slug is null;
