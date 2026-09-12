@@ -59,7 +59,7 @@ async function loadDashboard(u){
   if(dashboardPromise)return dashboardPromise;
   dashboardPromise=(async()=>{
     user=u;
-    sb.rpc('claim_guest_orders_for_user').catch(()=>{});
+    void sb.rpc('claim_guest_orders_for_user');
     const {data:p,error}=await sb.from('profiles').select('id,full_name,username,email,phone,division,district,upazila,union_name,street_address').eq('id',u.id).maybeSingle();
     if(error||!p){msg('login-message','Your account is verified, but the profile is incomplete. Please contact ChikChik.');return}
     profile=p;$('#auth-view').hidden=true;$('#dashboard-view').hidden=false;$('#account-name').textContent=(p.full_name||'Chik').split(' ')[0];$('#account-handle').textContent=`@${p.username} · ${p.email}`;setupProfile(p);
